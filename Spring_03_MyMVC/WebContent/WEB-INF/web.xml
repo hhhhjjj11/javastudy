@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>Spring_03_MyMVC</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+  <!-- class값에 들어간 주소로 name의 디스패처서블릿을 등록하고 -->
+  <!-- param-value의 값인 경로에있는 xml파일을 설정파일로 등록하겠다. -->
+  	<servlet-name>springDispatcherServlet</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  	<init-param>
+  		<param-name>contextConfigLocation</param-name>
+  		<param-value>/WEB-INF/servlet-context.xml</param-value>
+  	</init-param>
+  </servlet>
+  
+  <!-- 서블릿이 어떤 url을 담당할지 매핑해줌 아래와 같이 /로 쓰면 모든 경로를 다 springDispatcherServlet에서 처리하도록 매핑한 것임. -->
+  <servlet-mapping>
+  	<servlet-name>springDispatcherServlet</servlet-name>
+  	<url-pattern>/</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 스프링의 컨텍스트 설정파일 등록한다. -->
+  <context-param>
+  	<param-name>contextConfigLocation</param-name>
+  	<param-value>/WEB-INF/root-context.xml</param-value>
+  </context-param>
+  
+  <!-- 어떤 동작을 감지하고 발동하는 것에 관한 설정 -->
+  <!-- library > Maven Dependencies > spring-web > ~~.web.context > ContextLoaderListener.class경로 -->
+  <listener>
+  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
+  <!-- 요청을 처리하기 전 가장 먼저 거치게 하고싶은 필터 설정 예컨대 인코딩관련 -->
+  <!-- 인코딩필터의 경로 : Maven Dependencies > spring-web > ~~.web.filter > CharacterEncodingFilter.class경로 -->
+  <filter>
+  	<filter-name>encodingFilter</filter-name>
+  	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+  	<!-- init-param은 정해진 속성의 이름임. 
+  	따라서 이 태그는 임의로 이름을 정하는게 아님.
+  	마치 css스타일을 먹이듯이 속성이름과 값의 종류가 정해져있고 그 안에서 써야함. -->
+  	<init-param>
+  		<param-name>encoding</param-name>
+  		<param-value>UTF-8</param-value>
+  	</init-param>
+  </filter>
+  
+  <!-- 어떤 url로 요청이 들어왓을때 필터를 거치도록 할것인지 매핑해줘야됨 -->
+  <!-- /* 로 쓰면 모든 요청임 -->
+  <filter-mapping>
+  	<filter-name>encodingFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+</web-app>
