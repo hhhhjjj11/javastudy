@@ -53,4 +53,10 @@ public class MyController {
 		model.addAttribute("msg", "바구니에 데이터를 넣어서 보냈다.");
 		return "test2";
 	}
+	
+	// 파라미터로 여러개의 값을 받고 싶다.
+	@GetMapping("test3")
+	public String test3(Model model, String id, String pw) {
+		return "test3";
+	}
 }
