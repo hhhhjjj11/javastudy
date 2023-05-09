@@ -21,7 +21,7 @@ public class MyController {
 	public void setMyService(MyService myService) {
 		this.myService = myService;
 	}
-	
+	//sd
 	// "home"이라는 요청이 들어오면 처리 
 	// ModelAndView의 객체를 반환하는 메서드를 정의
 	@RequestMapping("home")
