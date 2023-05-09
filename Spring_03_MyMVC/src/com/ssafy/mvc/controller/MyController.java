@@ -2,8 +2,8 @@ package com.ssafy.mvc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import com.ssafy.mvc.model.service.MyService;
 
@@ -21,22 +21,36 @@ public class MyController {
 	public void setMyService(MyService myService) {
 		this.myService = myService;
 	}
-	//sd
+
 	// "home"이라는 요청이 들어오면 처리 
 	// ModelAndView의 객체를 반환하는 메서드를 정의
-	@RequestMapping("home")
-	public ModelAndView homeHandle() {
-		System.out.println("ddd");
-		ModelAndView mav = new ModelAndView();
-		System.out.println("home 요청이  왔다.");
-		
-		// mav.addObject("키", "밸류")
-		mav.addObject("msg", "Welcome to Spring World");
-		
-		myService.doSomething();
-		// view 이름을 지정 해준다.
-		mav.setViewName("home");
-		
-		return mav;
+//	@RequestMapping("home")
+//	@RequestMapping(value="home", method= RequestMethod.GET)
+//	public ModelAndView homeHandle() {
+//		System.out.println("ddd");
+//		ModelAndView mav = new ModelAndView();
+//		System.out.println("home 요청이  왔다.");
+//		
+//		// mav.addObject("키", "밸류")
+//		mav.addObject("msg", "Welcome to Spring World");
+//		
+//		myService.doSomething();
+//		// view 이름을 지정 해준다.
+//		mav.setViewName("home");
+//		
+//		return mav;
+//	}
+//	
+	@GetMapping("test1")
+	public String test1() {
+		return "test1";
+	}
+	
+	// 데이터를 같이 보내고 싶으면..
+	// 바구니를 준비해라 ~~ 모델 바구니
+	@GetMapping("test2")
+	public String test2(Model model) {
+		model.addAttribute("msg", "바구니에 데이터를 넣어서 보냈다.");
+		return "test2";
 	}
 }
