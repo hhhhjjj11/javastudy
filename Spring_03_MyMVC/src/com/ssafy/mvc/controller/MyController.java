@@ -4,7 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.ssafy.mvc.model.dto.User;
 import com.ssafy.mvc.model.service.MyService;
 
 @Controller
@@ -25,22 +30,22 @@ public class MyController {
 	// "home"이라는 요청이 들어오면 처리 
 	// ModelAndView의 객체를 반환하는 메서드를 정의
 //	@RequestMapping("home")
-//	@RequestMapping(value="home", method= RequestMethod.GET)
-//	public ModelAndView homeHandle() {
-//		System.out.println("ddd");
-//		ModelAndView mav = new ModelAndView();
-//		System.out.println("home 요청이  왔다.");
-//		
-//		// mav.addObject("키", "밸류")
-//		mav.addObject("msg", "Welcome to Spring World");
-//		
-//		myService.doSomething();
-//		// view 이름을 지정 해준다.
-//		mav.setViewName("home");
-//		
-//		return mav;
-//	}
-//	
+	@RequestMapping(value="home", method= RequestMethod.GET)
+	public ModelAndView homeHandle() {
+		System.out.println("ddd");
+		ModelAndView mav = new ModelAndView();
+		System.out.println("home 요청이  왔다.");
+		
+		// mav.addObject("키", "밸류")
+		mav.addObject("msg", "Welcome to Spring World");
+		
+		myService.doSomething();
+		// view 이름을 지정 해준다.
+		mav.setViewName("home");
+		
+		return mav;
+	}
+	
 	@GetMapping("test1")
 	public String test1() {
 		return "test1";
@@ -55,8 +60,20 @@ public class MyController {
 	}
 	
 	// 파라미터로 여러개의 값을 받고 싶다.
+	// 1. 우선 인자로 Model model이 필요함
 	@GetMapping("test3")
 	public String test3(Model model, String id, String pw) {
+		model.addAttribute("id", id);
+		model.addAttribute("pw", pw);		
 		return "test3";
+	}
+	
+	// 적절한 DTO를 준비해놓으면 알아서 퐉 들어간다
+	@PostMapping("test4")
+	public String test4(Model model, User user) {
+		
+		System.out.println(user);
+		
+		return "test4";
 	}
 }
