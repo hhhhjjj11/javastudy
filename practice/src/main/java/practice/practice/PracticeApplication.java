@@ -7,6 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class PracticeApplication {
 
 	public static void main(String[] args) {
+
+		Member member = new Member();
+		member.setUsername("dddd");
+		System.out.println(member.getUsername());
 		SpringApplication.run(PracticeApplication.class, args);
 	}
 
