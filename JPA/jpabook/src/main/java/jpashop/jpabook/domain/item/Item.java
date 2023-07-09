@@ -4,7 +4,6 @@ import jpashop.jpabook.domain.Category;
 import jpashop.jpabook.domain.OrderItem;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,7 +12,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name= "dtype")
 @Getter @Setter
-public class Item {
+public abstract class Item {
 
     @Id
     @GeneratedValue
@@ -29,5 +28,8 @@ public class Item {
     @OneToMany(mappedBy = "item")
     private List<OrderItem> orderitem;
 
+    @ManyToMany(mappedBy = "items")
     private List<Category> category;
+
+
 }
