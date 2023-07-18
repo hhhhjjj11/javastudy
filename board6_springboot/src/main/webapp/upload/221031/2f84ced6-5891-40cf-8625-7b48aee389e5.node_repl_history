@@ -1,0 +1,9 @@
+.exit
+console.log(a + b);
+let b = 20;
+let a = 10;
+exit
+exoit
+node --version
+node -version
+npm i -g serve

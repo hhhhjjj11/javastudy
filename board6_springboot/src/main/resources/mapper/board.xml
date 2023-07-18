@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.board.model.mapper.BoardMapper">
+
+	<resultMap type="boardDto" id="article">
+		<result column="article_no" property="articleNo"/>
+		<result column="user_id" property="userId"/>
+		<result column="user_name" property="userName"/>
+		<result column="subject" property="subject"/>
+		<result column="content" property="content"/>
+		<result column="hit" property="hit"/>
+		<result column="register_time" property="registerTime"/>
+	</resultMap>
+	
+<!--  조회시 파일정보까지 함께 보기위해서 다음과 같이 기존의 resultMap을 확장함. 필드를 추가시키는 것. -->
+	<resultMap type="boardDto" id="viewArticle" extends="article">
+		<collection property="fileInfos" column="article_no" javaType="list" ofType="fileInfoDto" select="fileInfoList"/>
+		<!-- fileInfos 테이블에서  article_no를 기준으로 innerjoin해서 배열형식으로 다 불러올건데 이때 뭘 select할거냐면 ~~  select 문으로 id가 "fileInfoList"를 쓸거다~ (밑에 정의되어있음) -->
+	</resultMap>
+	
+	<resultMap type="fileInfoDto" id="file">
+		<result column="save_folder" property="saveFolder"/>
+		<result column="original_file" property="originalFile"/>
+		<result column="save_file" property="saveFile"/>
+	</resultMap> 
+
+	<insert id="writeArticle" parameterType="boardDto">
+		insert into board (user_id, subject, content, hit, register_time)
+		values (#{userId}, #{subject}, #{content}, 0, now())
+		<selectKey resultType="int" keyProperty="articleNo" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+	<!-- selectKey를 이용하여 생성한 데이터의 키를 반환한다.. ㅣ
+		last_insert_id()는 SQL메서드임. 가장 최근에 생성된 id를 가져옴.
+		order-AFTER는 insert into 문이 실행되고 난 뒤에 select문이 동작하도록 설정하는 것임.
+		그래야 내가 방금 만든 데이터의 키를 반환하겠지?
+		Dao(Mapper)에서 boardDto를 반환하도록 설정해놧었음.
+		keyProperty=articleNo로 설정해놧끼 때문에 -> 반환되는 키 넘버가 boardDto의 articleNo필드에 저장이 된다.
+	 -->
+	
+	<insert id="registerFile" parameterType="boardDto">
+		insert into file_info (article_no, save_folder, original_file, save_file)
+		values
+		<foreach collection="fileInfos" item="fileinfo" separator=" , ">
+			(#{articleNo}, #{fileinfo.saveFolder}, #{fileinfo.originalFile}, #{fileinfo.saveFile})
+		</foreach>
+	</insert>
+
+	<sql id="search">
+		<if test="word != null and word != ''">
+			<if test="key == 'subject'">
+				and subject like concat('%', #{word}, '%')
+			</if>
+			<if test="key != 'subject'">
+				and ${key} = #{word}
+			</if>
+		</if>
+	</sql>
+	<!--  sql조각 만들기 : WHERE절을 동적으로 생성하는것임
+		if문에 따라 다른 where절을 만든다 이말임.
+		include를 이용해서 불러와서 쓴다.
+	 -->
+	
+	<select id="listArticle" parameterType="map" resultMap="article">
+		select b.article_no, b.user_id, b.subject, b.content, b.hit, b.register_time, m.user_name
+		from board b, members m 
+		where b.user_id = m.user_id
+		<include refid="search"></include>
+		order by b.article_no desc
+		limit #{start}, #{listsize}
+	</select>
+	
+	<select id="getTotalArticleCount" parameterType="map" resultType="int">
+		select count(article_no)
+		from board
+		<where>
+			<include refid="search"></include>
+		</where>
+	</select>
+	
+	<select id="getArticle" parameterType="int" resultMap="viewArticle">
+		select b.article_no, b.user_id, b.subject, b.content, b.hit, b.register_time, m.user_name 
+		from board b, members m
+		where b.user_id = m.user_id
+		and b.article_no = #{articleNo}
+	</select>
+	
+	<select id="fileInfoList" resultMap="file">
+		select save_folder, original_file, save_file
+		from file_info
+		where article_no = #{articleNo}
+	</select>
+	
+	<update id="updateHit" parameterType="int">
+		update board
+		set hit = hit + 1
+		where article_no = #{articleNo}
+	</update>
+	
+	<update id="modifyArticle" parameterType="boardDto">
+		update board
+		set subject = #{subject}, content = #{content}
+		where article_no = #{articleNo}
+	</update>
+	
+	<delete id="deleteFile" parameterType="int">
+		delete from file_info
+		where article_no = #{articleNo}
+	</delete>
+	
+	<delete id="deleteArticle" parameterType="int">
+		delete from board
+		where article_no = #{articleNo}
+	</delete>
+
+</mapper>

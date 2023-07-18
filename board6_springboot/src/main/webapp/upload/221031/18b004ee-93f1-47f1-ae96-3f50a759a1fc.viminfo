@@ -1,0 +1,412 @@
+# 이 viminfo 파일은 빔이 만든 것입니다 Vim 8.2.
+# 조심만 한다면 고칠 수도 있습니다!
+
+# Viminfo version
+|1,4
+
+# 이 파일이 저장되었을 때의 'encoding'의 값
+*encoding=utf-8
+
+
+# hlsearch on (H) or off (h):
+~h
+# 명령 행 히스토리 (새것부터 오래된 것 순):
+:wq
+|2,0,1636676262,,"wq"
+:x
+|2,0,1631848151,,"x"
+:q!
+|2,0,1591160943,,"q!"
+:q
+|2,0,1591160762,,"q"
+
+# 찾을 문자열 히스토리 (새것부터 오래된 것 순):
+
+# 표현 히스토리 (새것부터 오래된 것 순):
+
+# 입력 행 히스토리 (새것부터 오래된 것 순):
+
+# 디버그 행 히스토리 (새것부터 오래된 것 순):
+
+# 레지스터:
+"1	LINE	0
+	#   (use "git push" to publish your local commits)
+|3,0,1,1,1,0,1589785529,"#   (use \"git push\" to publish your local commits)"
+"2	LINE	0
+	# Your branch is ahead of 'origin/master' by 3 commits.
+|3,0,2,1,1,0,1589785528,"# Your branch is ahead of 'origin/master' by 3 commits."
+"3	LINE	0
+	# On branch master
+|3,0,3,1,1,0,1589785528,"# On branch master"
+"4	LINE	0
+	#
+|3,0,4,1,1,0,1589785528,"#"
+"5	LINE	0
+	# Date:      Mon May 18 16:04:15 2020 +0900
+|3,0,5,1,1,0,1589785527,"# Date:      Mon May 18 16:04:15 2020 +0900"
+"6	LINE	0
+	#
+|3,0,6,1,1,0,1589785527,"#"
+"7	LINE	0
+	# with '#' will be ignored, and an empty message aborts the commit.
+|3,0,7,1,1,0,1589785526,"# with '#' will be ignored, and an empty message aborts the commit."
+"8	LINE	0
+	# Please enter the commit message for your changes. Lines starting
+|3,0,8,1,1,0,1589785526,"# Please enter the commit message for your changes. Lines starting"
+"9	LINE	0
+	
+|3,0,9,1,1,0,1589785525,""
+""-	BLOCK	0
+	e
+|3,1,36,2,1,0,1589785535,"e"
+
+# 파일 마크:
+'0  3  0  ~/Desktop/test/test.txt
+|4,48,3,0,1636676262,"~/Desktop/test/test.txt"
+'1  1  3  ~/Desktop/test/test.txt
+|4,49,1,3,1636674201,"~/Desktop/test/test.txt"
+'2  1  3  ~/Desktop/test/test.txt
+|4,50,1,3,1636674201,"~/Desktop/test/test.txt"
+'3  1  0  ~/6th-projects/.git/MERGE_MSG
+|4,51,1,0,1631848151,"~/6th-projects/.git/MERGE_MSG"
+'4  1  0  ~/live-hw/.git/MERGE_MSG
+|4,52,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+'5  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,53,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+'6  1  0  ~/Desktop/branch-pm/.git/COMMIT_EDITMSG
+|4,54,1,0,1586324795,"~/Desktop/branch-pm/.git/COMMIT_EDITMSG"
+'7  1  0  ~/Desktop/django_lecture/.git/COMMIT_EDITMSG
+|4,55,1,0,1585719995,"~/Desktop/django_lecture/.git/COMMIT_EDITMSG"
+'8  1  0  ~/Desktop/django_lecture/.git/MERGE_MSG
+|4,56,1,0,1585719201,"~/Desktop/django_lecture/.git/MERGE_MSG"
+'9  1  0  ~/Desktop/live-hw/.git/MERGE_MSG
+|4,57,1,0,1585535026,"~/Desktop/live-hw/.git/MERGE_MSG"
+
+# 점프목록 (새것이 먼저):
+-'  3  0  ~/Desktop/test/test.txt
+|4,39,3,0,1636676262,"~/Desktop/test/test.txt"
+-'  1  0  ~/Desktop/test/test.txt
+|4,39,1,0,1636676110,"~/Desktop/test/test.txt"
+-'  1  3  ~/Desktop/test/test.txt
+|4,39,1,3,1636674201,"~/Desktop/test/test.txt"
+-'  1  0  ~/6th-projects/.git/MERGE_MSG
+|4,39,1,0,1631848151,"~/6th-projects/.git/MERGE_MSG"
+-'  1  0  ~/6th-projects/.git/MERGE_MSG
+|4,39,1,0,1631848151,"~/6th-projects/.git/MERGE_MSG"
+-'  1  0  ~/6th-projects/.git/MERGE_MSG
+|4,39,1,0,1631848151,"~/6th-projects/.git/MERGE_MSG"
+-'  1  0  ~/6th-projects/.git/MERGE_MSG
+|4,39,1,0,1631848151,"~/6th-projects/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  0  ~/live-hw/.git/MERGE_MSG
+|4,39,1,0,1589953479,"~/live-hw/.git/MERGE_MSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+-'  1  18  ~/A_online/js/.git/COMMIT_EDITMSG
+|4,39,1,18,1589785551,"~/A_online/js/.git/COMMIT_EDITMSG"
+
+# 파일내의 마크 히스토리 (새것부터 오래된 순):
+
+> ~/Desktop/test/test.txt
+	*	1636676236	0
+	"	3	0
+	^	3	0
+	.	2	6
+	+	1	7
+	+	2	6
+
+> ~/6th-projects/.git/MERGE_MSG
+	*	1631848150	0
+	"	1	0
+
+> ~/live-hw/.git/MERGE_MSG
+	*	1589953476	0
+	"	1	0
+
+> ~/A_online/js/.git/COMMIT_EDITMSG
+	*	1589785551	0
+	"	1	18
+	^	1	19
+	.	1	18
+	+	11	0
+	+	1	18
+
+> ~/Desktop/branch-pm/.git/COMMIT_EDITMSG
+	*	1586324794	0
+	"	1	0
+
+> ~/Desktop/django_lecture/.git/COMMIT_EDITMSG
+	*	1585719994	0
+	"	1	0
+
+> ~/Desktop/django_lecture/.git/MERGE_MSG
+	*	1585719198	0
+	"	1	0
+
+> ~/Desktop/live-hw/.git/MERGE_MSG
+	*	1585535025	0
+	"	1	0
+	^	1	0
+	.	1	0
+	+	1	0
+
+> ~/Desktop/git_test/.git/COMMIT_EDITMSG
+	*	1585115393	0
+	"	1	8
+	^	1	9
+	.	1	8
+	+	1	8
+
+> ~/Desktop/web/.git/COMMIT_EDITMSG
+	*	1585016626	0
+	"	1	0
+
+> ~/golden_bell/.git/MERGE_MSG
+	*	1581036459	0
+	"	1	0
+
+> ~/branching/.git/MERGE_MSG
+	*	1580877020	0
+	"	1	0
+
+> ~/golden_bell/README.md
+	*	1580869406	0
+	"	1	12
+	^	1	13
+	.	1	12
+	+	1	12
+
+> ~/master-python/.gitginore
+	*	1580270697	0
+	"	1	17
+	^	1	18
+	.	1	17
+	+	1	17
+
+> ~/master-python/.gitignore
+	*	1580270678	0
+	"	1	0
+	^	1	0
+	.	1	0
+	+	1	0
+
+> ~/master-python/pset03.ipynb
+	*	1580270566	0
+	"	194	0
+	^	194	0
+	.	193	1
+	+	193	1
+
+> ~/.bashrc
+	*	1579567267	0
+	"	2	58
+	^	2	59
+	.	2	58
+	+	1	27
+	+	2	7
+	+	1	8
+	+	2	58
+	f	1	0
+	z	1	0
+
+> ~/Downloads/student/python/README.md
+	*	1579497059	0
+	"	2	11
+	^	2	12
+	.	3	0
+	+	2	12
+	+	2	11
+	+	3	0
+
+> ~/baekiljang/README.md
+	*	1579494760	0
+	"	1	7
+	^	1	8
+	.	2	0
+	+	2	0
+
+> ~/TIL/.git/COMMIT_EDITMSG
+	*	1579481367	0
+	"	1	0
+	^	1	10
+	.	1	0
+	+	1	0
