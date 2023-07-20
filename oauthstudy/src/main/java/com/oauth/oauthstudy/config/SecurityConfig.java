@@ -1,5 +1,6 @@
 package com.oauth.oauthstudy.config;
 
+import com.oauth.oauthstudy.config.oauth.PrincipalOauth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,8 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Autowired
-//    private PrincipalOauth2UserService principalOauth2UserService;
+    @Autowired
+    private PrincipalOauth2UserService principalOauth2UserService;
 
     // @Bean의 기능 - 해당 메서드의 리턴되는 오브젝트를 IoC로 등록해준다.
     @Bean
@@ -36,6 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/")
                 .and()
                 .oauth2Login()
-                .loginPage("/loginForm");   // 이거는 굳이 설정을 안해도 되는게 맞지 않나? 근데 이거 있어야하는것같다.
+                .loginPage("/loginForm")   // 이거는 굳이 설정을 안해도 되는게 맞지 않나? 근데 이거 있어야하는것같다.
+                .userInfoEndpoint()
+                .userService(principalOauth2UserService);
     }
 }
