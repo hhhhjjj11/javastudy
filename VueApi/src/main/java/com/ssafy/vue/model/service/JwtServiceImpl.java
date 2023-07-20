@@ -65,7 +65,7 @@ public class JwtServiceImpl implements JwtService {
 		return jwt;
 	}
 
-	// Signature 설정에 들어갈 key 생성.
+	// Signature 설정에 들어갈 key 생성. (비밀키)
 	private byte[] generateKey() {
 		byte[] key = null;
 		try {

@@ -60,6 +60,12 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- 스프링시큐리티-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
