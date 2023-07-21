@@ -59,8 +59,8 @@ public class IndexController {
     }
 
     @GetMapping("/user")
-    public @ResponseBody String user(){
-
+    public @ResponseBody String user(@AuthenticationPrincipal PrincipalDetails principalDetails){
+        System.out.println("principalDetails: "+principalDetails.getMember());
         return "user";
     }
 
@@ -78,6 +78,7 @@ public class IndexController {
     public String join(){
         return "joinForm";
     }
+
     @GetMapping("/joinProc")
     public @ResponseBody String joinProc(){
         return "joinProc";

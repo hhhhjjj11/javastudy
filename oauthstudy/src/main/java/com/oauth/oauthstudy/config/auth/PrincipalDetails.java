@@ -13,16 +13,28 @@ import java.util.Map;
 @Data
 public class PrincipalDetails implements UserDetails, OAuth2User {
 
-
     private Member member;
+    private Map<String, Object> attributes;     // 이거는 카카오서버로부터 받은 유저정보를 담기 위해 만든 멤버변수임
+                                                // 카카오서버에서 accesstoken과 함께 유저정보를 주는 attributes객체를 함께 넘겨줌
+                                                // OAuth로그인시 Authentication객체에 넣을 User객체를 만들때 attributes를 담아줌.
 
+    // 일반 로그인
     public PrincipalDetails(Member member){
         this.member = member;
     }
 
+    // OAuth 로그인
+    public PrincipalDetails(Member member, Map<String, Object> attributes){
+
+        this.member = member;
+        this.attributes = attributes;
+    }
+
+
     @Override
-    public Map<String, Object> getAttributes() {
-        return null;
+    public Map<String, Object> getAttributes()
+    {
+        return attributes;
     }
 
     @Override
@@ -39,8 +51,9 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 
     @Override
     public String getPassword() {
-        return member.getPassword();
+        return null;
     }
+
 
     @Override
     public String getUsername() {
