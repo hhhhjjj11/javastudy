@@ -26,6 +26,8 @@ public class Member {
     private String provider;
     private String providerId;
 
+    private String refreshToken; // 리프레시 토큰
+
     @Builder
     public Member(String username, String email, String role, Timestamp createDate, String provider, String providerId) {
         this.username = username;
@@ -36,4 +38,9 @@ public class Member {
         this.provider = provider;
         this.providerId = providerId;
     }
+
+    public void updateRefreshToken(String updateRefreshToken) {
+        this.refreshToken = updateRefreshToken;
+    }
+
 }
