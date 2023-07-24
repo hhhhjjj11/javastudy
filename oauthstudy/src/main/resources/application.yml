@@ -1,4 +1,9 @@
 spring:
+  profiles:
+    group:
+      "local": "local,jwt,oauth"
+    active: local
+
   datasource:
     hikari:
       maximum-pool-size: 10

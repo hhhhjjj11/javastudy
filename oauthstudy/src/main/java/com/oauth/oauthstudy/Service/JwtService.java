@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.oauth.oauthstudy.domain.member.Member;
 import com.oauth.oauthstudy.repository.MemberRepository;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -69,6 +70,8 @@ public class JwtService {
     public void sendAccessAndRefreshToken(HttpServletResponse response, String accessToken, String refreshToken){
         response.setStatus(HttpServletResponse.SC_OK);
         response.setHeader(accessHeader, accessToken);
+        setRefreshTokenHeader(response, refreshToken);
+        System.out.println("Access Token, Refresh Token 헤더 설정 완료");
     }
 
     public Optional<String> extractRefreshToken(HttpServletRequest request) {
@@ -106,9 +109,21 @@ public class JwtService {
     }
 
     public void updateRefreshToken(String username, String refreshToken) throws NullPointerException{
-        Member member = memberRepository.findByusername(username);
-        member.updateRefreshToken(refreshToken);
+        memberRepository.findByusername(username)
+                        .ifPresentOrElse(
+                                member ->member.updateRefreshToken(refreshToken),
+                                () ->new Exception("일치하는 회원이 없습니다.")
+                        );
     }
 
+    public boolean isTokenValid(String token){
+        try{
+            JWT.require(Algorithm.HMAC512(secretKey)).build().verify(token);
+            return true;
+        } catch(Error e){
+            System.out.printf("유효하지않은 토큰입니다. {}", e.getMessage());
+            return false;
+        }
+    }
 
 }

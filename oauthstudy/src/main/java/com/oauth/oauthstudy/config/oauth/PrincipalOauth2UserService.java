@@ -14,6 +14,8 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
@@ -63,25 +65,28 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         String email = oAuth2UserInfo.getEmail();
         String role = "ROLE_USER";
 
-        // db뒤져서 없으면
-        Member memberEntity = memberRepository.findByusername(username);
-        if(memberEntity==null){
-            memberEntity = Member.builder()
+
+        Optional<Member> memberOptional = memberRepository.findByusername(username);
+        Member memberEntity = memberOptional.orElseGet(() -> {
+            return Member.builder()
                     .username(username)
                     .provider(provider)
                     .providerId(providerId)
                     .email(email)
                     .role(role)
                     .build();
-            memberRepository.save(memberEntity);
-        }
-        // DB에 이미 있으면 회원가입 진행 안해줘도됨.
+        });
+        memberOptional.ifPresentOrElse(
+                member -> { /* 이미 회원 정보가 데이터베이스에 존재하는 경우 */ },
+                () -> memberRepository.save(memberEntity) /* 회원 정보가 데이터베이스에 없는 경우 */
+        );
 
-        // PrincipalDetails 객체(Userdata객체) 만들어서 리턴.
-        // 여기서 remind. PrincipalDetails 에서 생성자를 두 개를 만들었었다.
-        // 하나는 일반로그인용, 하나는 OAuth로그인용
-        // 둘의 차이는 카카오서버로부터 받은 유저정보인 Attributes 데이터를 인자로 넣어주냐마냐의 차이.
-        // 여기서는 물론 OAuth 생성자를 사용해서, member객체 뿐만아니라 Attributes까지 넣어준다!!!
+// PrincipalDetails 객체(Userdata객체) 만들어서 리턴.
+// 여기서 remind. PrincipalDetails 에서 생성자를 두 개를 만들었었다.
+// 하나는 일반로그인용, 하나는 OAuth로그인용
+// 둘의 차이는 카카오서버로부터 받은 유저정보인 Attributes 데이터를 인자로 넣어주냐마냐의 차이.
+// 여기서는 물론 OAuth 생성자를 사용해서, member객체 뿐만아니라 Attributes까지 넣어준다!!!
         return new PrincipalDetails(memberEntity, oAuth2User.getAttributes());
+
     }
 }
