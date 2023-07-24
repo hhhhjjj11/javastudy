@@ -4,6 +4,7 @@ import com.oauth.oauthstudy.config.auth.PrincipalDetails;
 import com.oauth.oauthstudy.config.oauth.provider.KakaoUserInfo;
 import com.oauth.oauthstudy.config.oauth.provider.OAuth2UserInfo;
 import com.oauth.oauthstudy.domain.member.Member;
+import com.oauth.oauthstudy.domain.member.Role;
 import com.oauth.oauthstudy.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,11 +22,6 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
 
     // @Bean의 기능 - 해당 메서드의 리턴되는 오브젝트를 IoC로 등록해준다.
-    @Bean
-    public BCryptPasswordEncoder encodePwd(){
-        return new BCryptPasswordEncoder();
-    }
-
 
     @Autowired
     private MemberRepository memberRepository;
@@ -63,7 +59,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         String providerId = oAuth2UserInfo.getProviderId();
         String username = provider+"_"+providerId;  // kakao_123102401051349
         String email = oAuth2UserInfo.getEmail();
-        String role = "ROLE_USER";
+        Role role = Role.GUEST;
 
 
         Optional<Member> memberOptional = memberRepository.findByusername(username);

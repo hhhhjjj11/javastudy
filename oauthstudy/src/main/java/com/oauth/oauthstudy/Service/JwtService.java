@@ -44,7 +44,7 @@ public class JwtService {
     private static final String USERNAME_CLAIM = "username";
     private static final String BEARER = "Bearer";
 
-    public String creaetAccessToken(String username){
+    public String createAccessToken(String username){
         Date now = new Date();
         return JWT.create()
                 .withSubject(ACCESS_TOKEN_SUBJECT)

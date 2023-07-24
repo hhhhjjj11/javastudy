@@ -18,7 +18,8 @@ public class Member {
     private String username;
     private String password;
     private String email;
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @CreationTimestamp
     private Timestamp createDate;
@@ -29,7 +30,7 @@ public class Member {
     private String refreshToken; // 리프레시 토큰
 
     @Builder
-    public Member(String username, String email, String role, Timestamp createDate, String provider, String providerId) {
+    public Member(String username, String email, Role role, Timestamp createDate, String provider, String providerId) {
         this.username = username;
         this.password = password;
         this.email = email;

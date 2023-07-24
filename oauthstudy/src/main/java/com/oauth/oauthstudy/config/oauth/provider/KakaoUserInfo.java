@@ -1,5 +1,7 @@
 package com.oauth.oauthstudy.config.oauth.provider;
 
+import com.oauth.oauthstudy.domain.member.Role;
+
 import java.util.Map;
 
 public class KakaoUserInfo implements OAuth2UserInfo{
@@ -28,4 +30,5 @@ public class KakaoUserInfo implements OAuth2UserInfo{
     public String getName() {
         return null;
     }
+
 }

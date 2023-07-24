@@ -1,6 +1,8 @@
 package com.oauth.oauthstudy.config.auth;
 
 import com.oauth.oauthstudy.domain.member.Member;
+import com.oauth.oauthstudy.domain.member.Role;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,11 +21,13 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
                                                 // OAuth로그인시 Authentication객체에 넣을 User객체를 만들때 attributes를 담아줌.
 
     // 일반 로그인
+    @Builder
     public PrincipalDetails(Member member){
         this.member = member;
     }
 
     // OAuth 로그인
+    @Builder
     public PrincipalDetails(Member member, Map<String, Object> attributes){
 
         this.member = member;
@@ -43,7 +47,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
         collect.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                return member.getRole();
+                return member.getRole().getKey();
             }
         });
         return collect;
@@ -53,7 +57,6 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     public String getPassword() {
         return null;
     }
-
 
     @Override
     public String getUsername() {

@@ -3,6 +3,7 @@ package com.oauth.oauthstudy.controller;
 
 import com.oauth.oauthstudy.config.auth.PrincipalDetails;
 import com.oauth.oauthstudy.domain.member.Member;
+import com.oauth.oauthstudy.domain.member.Role;
 import com.oauth.oauthstudy.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -89,7 +90,7 @@ public class IndexController {
         System.out.println("회원가입 요청!!!!!");
         System.out.println(member);
 
-        member.setRole("ROLE_USER");
+        member.setRole(Role.USER);
         String rawPassword = member.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         member.setPassword(encPassword);

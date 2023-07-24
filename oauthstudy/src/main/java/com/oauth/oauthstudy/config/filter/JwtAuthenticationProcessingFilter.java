@@ -1,6 +1,7 @@
 package com.oauth.oauthstudy.config.filter;
 
 import com.oauth.oauthstudy.Service.JwtService;
+import com.oauth.oauthstudy.config.auth.PrincipalDetails;
 import com.oauth.oauthstudy.domain.member.Member;
 import com.oauth.oauthstudy.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +32,7 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
+        System.out.println("JWT필터======================================");
         if(request.getRequestURI().equals(NO_CHECK_URL)){
             filterChain.doFilter(request, response);
             return;
@@ -55,7 +56,7 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
         memberRepository.findByRefreshToken(refreshToken)
                 .ifPresent(member -> {
                     String reIssuedRefreshToken = reIssueRefreshToken(member);
-                    jwtService.sendAccessAndRefreshToken(response, jwtService.creaetAccessToken(member.getUsername()),
+                    jwtService.sendAccessAndRefreshToken(response, jwtService.createAccessToken(member.getUsername()),
                             reIssuedRefreshToken);
                 });
     }
@@ -84,14 +85,10 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
 
         String password = member.getPassword();
 
-        UserDetails userDetailsUser = org.springframework.security.core.userdetails.User.builder()
-                .username(member.getEmail())
-                .password(password)
-                .roles(member.getRole())
-                .build();
+        PrincipalDetails principalDetails = new PrincipalDetails(member);
 
         Authentication authentication =
-                new UsernamePasswordAuthenticationToken(userDetailsUser, null, authoritiesMapper.mapAuthorities(userDetailsUser.getAuthorities()));
+                new UsernamePasswordAuthenticationToken(principalDetails, null, authoritiesMapper.mapAuthorities(principalDetails.getAuthorities()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         }
