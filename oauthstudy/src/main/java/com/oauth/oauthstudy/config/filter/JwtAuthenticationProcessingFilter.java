@@ -4,38 +4,49 @@ import com.oauth.oauthstudy.Service.JwtService;
 import com.oauth.oauthstudy.config.auth.PrincipalDetails;
 import com.oauth.oauthstudy.domain.member.Member;
 import com.oauth.oauthstudy.repository.MemberRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
-@RequiredArgsConstructor
-public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
 
-    private static final String NO_CHECK_URL = "/login"; // "/login"으로 들어오는 요청은 Filter 작동 X
+public class JwtAuthenticationProcessingFilter extends BasicAuthenticationFilter {
+
+    private static final String[] NO_CHECK_URL = {"/login", "/"}; // "/login"으로 들어오는 요청은 Filter 작동 X
+
 
     private final JwtService jwtService;
+
 
     private final MemberRepository memberRepository;
 
     private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
 
+    public JwtAuthenticationProcessingFilter(AuthenticationManager authenticationManager, JwtService jwtService, MemberRepository memberRepository) {
+        super(authenticationManager);
+        this.jwtService = jwtService;
+        this.memberRepository = memberRepository;
+    }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         System.out.println("JWT필터======================================");
-        if(request.getRequestURI().equals(NO_CHECK_URL)){
-            filterChain.doFilter(request, response);
-            return;
+
+        for (String noCheck : NO_CHECK_URL){
+            if(request.getRequestURI().equals(noCheck)){
+                filterChain.doFilter(request, response);
+                return;
+            }
         }
 
         String refreshToken = jwtService.extractRefreshToken(request)
@@ -53,6 +64,7 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
             checkAccessTokenAndAuthentication(request, response, filterChain);
         //}
     }
+
 
     private void checkRefreshTokenAndReIssueAccessToken(HttpServletResponse response, String refreshToken) {
         memberRepository.findByRefreshToken(refreshToken)
@@ -75,6 +87,11 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
 
         System.out.println("checkAccessTokenAndAuthentication() 호출");
         System.out.println("jwtService.extractAccessToken(request)"+jwtService.extractAccessToken(request));
+
+        Optional<String> token  = jwtService.extractAccessToken(request);
+        if(token.isEmpty()){
+            throw new RuntimeException("액세스토큰이 비어있습니다.");
+        }
         jwtService.extractAccessToken(request)
                 .filter(jwtService::isTokenValid)
                 .ifPresent(accessToken -> jwtService.extractEmail(accessToken)
