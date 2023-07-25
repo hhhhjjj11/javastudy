@@ -1,16 +1,17 @@
 package com.oauth.oauthstudy.Service;
 
-
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.oauth.oauthstudy.domain.member.Member;
 import com.oauth.oauthstudy.repository.MemberRepository;
+import jdk.swing.interop.SwingInterOpUtils;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -69,7 +70,7 @@ public class JwtService {
 
     public void sendAccessAndRefreshToken(HttpServletResponse response, String accessToken, String refreshToken){
         response.setStatus(HttpServletResponse.SC_OK);
-        response.setHeader(accessHeader, accessToken);
+        setAccessTokenHeader(response, accessToken);
         setRefreshTokenHeader(response, refreshToken);
         System.out.println("Access Token, Refresh Token 헤더 설정 완료");
     }
@@ -81,6 +82,10 @@ public class JwtService {
     }
 
     public Optional<String> extractAccessToken(HttpServletRequest request) {
+        System.out.println("request"+request);
+        System.out.println("SDFSDFSDFSDF");
+        System.out.println("request.getHeader(accessHeader)"+request.getHeader(accessHeader));
+
         return Optional.ofNullable(request.getHeader(accessHeader))
                 .filter(refreshToken -> refreshToken.startsWith(BEARER))
                 .map(refreshToken -> refreshToken.replace(BEARER, ""));
@@ -108,17 +113,28 @@ public class JwtService {
         response.setHeader(refreshHeader, refreshToken);
     }
 
-    public void updateRefreshToken(String username, String refreshToken) throws NullPointerException{
-        memberRepository.findByusername(username)
-                        .ifPresentOrElse(
-                                member ->member.updateRefreshToken(refreshToken),
-                                () ->new Exception("일치하는 회원이 없습니다.")
-                        );
+    @Transactional
+    public void updateRefreshToken(String username, String refreshToken) {
+        Optional<Member> aaa = memberRepository.findByusername(username);
+        System.out.println("aaa"+aaa);
+        System.out.println("aaa"+refreshToken);
+//        memberRepository.findByusername(username)
+//                        .ifPresentOrElse(
+//                                member -> member.updateRefreshToken(refreshToken),
+//                                () ->new Exception("일치하는 회원이 없습니다.")
+//                        );
+
+        Member tempMember = memberRepository.findByusername(username)
+                .orElse(null);
+        tempMember.updateRefreshToken(refreshToken);
+
     }
 
     public boolean isTokenValid(String token){
+        System.out.println("isTokenValid오나??");
         try{
             JWT.require(Algorithm.HMAC512(secretKey)).build().verify(token);
+            System.out.println("유효한 토큰입니다!!!!!!!!!!!!!!!!!!!!!!!!!!1");
             return true;
         } catch(Error e){
             System.out.printf("유효하지않은 토큰입니다. {}", e.getMessage());

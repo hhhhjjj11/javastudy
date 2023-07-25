@@ -6,9 +6,10 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity
+@Entity(name = "member")
 @Data
 @NoArgsConstructor
+//@Table(name="members")
 public class Member {
 
     @Id
@@ -30,7 +31,7 @@ public class Member {
     private String refreshToken; // 리프레시 토큰
 
     @Builder
-    public Member(String username, String email, Role role, Timestamp createDate, String provider, String providerId) {
+    public Member(String username, String email, Role role, Timestamp createDate, String provider, String providerId, String refreshToken) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -38,10 +39,10 @@ public class Member {
         this.createDate = createDate;
         this.provider = provider;
         this.providerId = providerId;
+        this.refreshToken = refreshToken;
     }
 
     public void updateRefreshToken(String updateRefreshToken) {
         this.refreshToken = updateRefreshToken;
     }
-
 }

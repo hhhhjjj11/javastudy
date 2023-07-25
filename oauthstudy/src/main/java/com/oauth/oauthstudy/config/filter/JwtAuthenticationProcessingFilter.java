@@ -28,7 +28,7 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
 
     private final MemberRepository memberRepository;
 
-    private GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
+    private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -42,14 +42,16 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
                 .filter(jwtService::isTokenValid)
                 .orElse(null);
 
+        System.out.println("JWT필터, refreshToken : "+refreshToken);
+
         if(refreshToken != null){
             checkRefreshTokenAndReIssueAccessToken(response, refreshToken);
             return;
         }
 
-        if(refreshToken == null) {
+        //if(refreshToken == null) {
             checkAccessTokenAndAuthentication(request, response, filterChain);
-        }
+        //}
     }
 
     private void checkRefreshTokenAndReIssueAccessToken(HttpServletResponse response, String refreshToken) {
@@ -72,6 +74,7 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
     private void checkAccessTokenAndAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         System.out.println("checkAccessTokenAndAuthentication() 호출");
+        System.out.println("jwtService.extractAccessToken(request)"+jwtService.extractAccessToken(request));
         jwtService.extractAccessToken(request)
                 .filter(jwtService::isTokenValid)
                 .ifPresent(accessToken -> jwtService.extractEmail(accessToken)

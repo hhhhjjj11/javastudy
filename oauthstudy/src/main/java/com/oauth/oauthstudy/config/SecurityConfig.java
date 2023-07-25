@@ -18,7 +18,6 @@ import org.springframework.security.web.authentication.logout.LogoutFilter;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-
     @Autowired
     private PrincipalOauth2UserService principalOauth2UserService;
 
@@ -61,7 +60,6 @@ public class SecurityConfig {
                 .userService(principalOauth2UserService);
 
         http.addFilterAfter(jwtAuthenticationProcessingFilter(), LogoutFilter.class);
-
         return http.build();
     }
 

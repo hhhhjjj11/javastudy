@@ -28,6 +28,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
     // 후처리 함수
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+        System.out.println("OAuth2UserRequest");
         System.out.println("getClientRegistration: "+userRequest.getClientRegistration());
         System.out.println("getAccessToken.getTokenValue: "+userRequest.getAccessToken().getTokenValue());
 
