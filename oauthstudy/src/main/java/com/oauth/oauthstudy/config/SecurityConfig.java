@@ -15,6 +15,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
@@ -45,14 +47,16 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+
         http
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .formLogin().disable()
                 .httpBasic().disable()
-                .apply(new MyCustomDsl())
-                .and()
+//                .apply(new MyCustomDsl())
+//                .and()
                 .authorizeRequests()
                 .antMatchers("/user/**").authenticated()
                 // .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN') or
@@ -68,19 +72,20 @@ public class SecurityConfig {
                 .userInfoEndpoint()
                 .userService(principalOauth2UserService);
 
+        http.addFilterAfter(new JwtAuthenticationProcessingFilter(jwtService, memberRepository), LogoutFilter.class);
         return http.build();
     }
-
-    public class MyCustomDsl extends AbstractHttpConfigurer<MyCustomDsl, HttpSecurity> {
-        @Override
-        public void configure(HttpSecurity http) throws Exception {
-            AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
-            http
-                    .addFilter(corsConfig.corsFilter())
-                    .addFilter(new JwtAuthenticationProcessingFilter(authenticationManager, jwtService, memberRepository));
-//                    .addFilter(new JW(authenticationManager, userRepository));
-        }
-    }
+//
+//    public class MyCustomDsl extends AbstractHttpConfigurer<MyCustomDsl, HttpSecurity> {
+//        @Override
+//        public void configure(HttpSecurity http) throws Exception {
+//            AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
+//            http
+//                    .addFilter(corsConfig.corsFilter())
+//                    .addFilter(new JwtAuthenticationProcessingFilter(jwtService, memberRepository));
+////                    .addFilter(new JW(authenticationManager, userRepository));
+//        }
+//    }
 //    @Bean
 //    public JwtAuthenticationProcessingFilter jwtAuthenticationProcessingFilter() {
 //        JwtAuthenticationProcessingFilter jwtAuthenticationFilter = new JwtAuthenticationProcessingFilter(jwtService, memberRepository);

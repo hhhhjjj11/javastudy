@@ -4,6 +4,8 @@ import com.oauth.oauthstudy.Service.JwtService;
 import com.oauth.oauthstudy.config.auth.PrincipalDetails;
 import com.oauth.oauthstudy.domain.member.Member;
 import com.oauth.oauthstudy.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -11,6 +13,7 @@ import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMap
 import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -19,36 +22,44 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
-
-public class JwtAuthenticationProcessingFilter extends BasicAuthenticationFilter {
-
-    private static final String[] NO_CHECK_URL = {"/login", "/"}; // "/login"으로 들어오는 요청은 Filter 작동 X
-
+@RequiredArgsConstructor
+public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
-
-
     private final MemberRepository memberRepository;
 
     private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
 
-    public JwtAuthenticationProcessingFilter(AuthenticationManager authenticationManager, JwtService jwtService, MemberRepository memberRepository) {
-        super(authenticationManager);
-        this.jwtService = jwtService;
-        this.memberRepository = memberRepository;
-    }
+    @Value("${jwt.secretKey}")
+    private String secretKey;
+
+    @Value("${jwt.access.expiration}")
+    private Long accessTokenExpirationPeriod;
+
+    @Value("${jwt.refresh.expiration}")
+    private Long refreshTokenExpirationPeriod;
+
+    @Value("${jwt.access.header}")
+    private String accessHeader;
+
+    @Value("${jwt.refresh.header}")
+    private String refreshHeader;
+
+    private static final String BEARER = "Bearer";
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         System.out.println("JWT필터======================================");
-
-        for (String noCheck : NO_CHECK_URL){
-            if(request.getRequestURI().equals(noCheck)){
-                filterChain.doFilter(request, response);
-                return;
-            }
+        System.out.println("sdfdxxcccc");
+        String header = request.getHeader(accessHeader);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!"+header);
+        if(header == null || !header.startsWith(BEARER)){
+            filterChain.doFilter(request, response);
+            return;
         }
 
+
+        System.out.println("하하하하하");
         String refreshToken = jwtService.extractRefreshToken(request)
                 .filter(jwtService::isTokenValid)
                 .orElse(null);
@@ -64,7 +75,6 @@ public class JwtAuthenticationProcessingFilter extends BasicAuthenticationFilter
             checkAccessTokenAndAuthentication(request, response, filterChain);
         //}
     }
-
 
     private void checkRefreshTokenAndReIssueAccessToken(HttpServletResponse response, String refreshToken) {
         memberRepository.findByRefreshToken(refreshToken)
